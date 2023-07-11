@@ -349,6 +349,8 @@ back = mutate(back, pb = 0)
 back = cbind(back, terra::extract(bioc, back[,c(1,2)])[,-1])
 back = as_tibble(back)
 ```
+En este apartado generamos los fondos para cada una de las variables expuestas, contando así desde el 1, 18,35, 52, 69, 86, 103, 120. Observado si es verdadero o falso.
+
 ```{r}
 # Join data 
 tble = rbind(occr, back)
@@ -374,7 +376,7 @@ rstr = terra::rast(rstr)
 rslt = terra::as.data.frame(rstr, xy = T) %>%  as_tibble()
 
 ```
-
+Al finalizar nos representa los datos de la especie de Annonas cherimola nos representa que el clima en diferentes provincias es apto para este tipo de especies. Al norte con las provincias Pichincha e Imbabura existe mas diversidad y en las Islas Galápagos y asi como en la parte del sur se cuenta con la provincia de Loja, también se ha visto que estas son exportadas mas en estas provincias y esta planta es de la  familia guanabana 
 
 
 
