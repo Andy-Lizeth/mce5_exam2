@@ -101,6 +101,17 @@ summary(Leishmania)
 En la exploración de datos no smuestra datos de otras enfer..percent_blast donde la mediana es 0.9500    percent_affect de la mediana es de 0.6500  percent_leuco=0.6300   periferia_leuc= 0.900 periferia_blast= 0.5200
 lo que nos da a entender que contamos on un valor alto en percent blast. Igualmente la temperatura varía de de 0.9 a 1.-.
 
+```{r}
+##Exploración de datos
+library(tidyverse)
+library(readr)
+library(dplyr)
+disease <- read_excel("~/disease.xlsx")
+str(disease)
+summary(disease)
+```
+Tenemos datos nativo , datos genero, el tramiento y lo años, conmparando con estos datos vemos que gender, treatment, recover cuenta con un dato de 1000, el cuartil 1 de el resto de datos es de o menos el de año que cuneta con 9.5
+
 ## **PREGUNTA 2: Series de tiempo [3 PUNTOS]**
 
 En el archivo `"ts.xlsx"` tiene tres datos: 
