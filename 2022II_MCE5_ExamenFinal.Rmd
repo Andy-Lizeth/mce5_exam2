@@ -1,8 +1,8 @@
 ---
 title: "Métodos Cuantitativos en Ecología - MCE5"
 subtitle: "EXAMEN FINAL - 2022II"
-author: 'Apellido Nombre'
-date: "`r Sys.Date()`"
+author: 'ANDY AVILÉS LIZETH FÁTIMA'
+date: "`r Sys.Date(11 DE JULIO DEL 2023)`"
 output:
   html_document:
     toc: yes
