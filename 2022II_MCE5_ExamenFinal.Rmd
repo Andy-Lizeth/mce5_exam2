@@ -95,7 +95,7 @@ HO: Los insecticidad que estan descritas aumentan la cantidad de mosquitos  no a
 HA: Los insecticidad que estan descritas disminuyen la cantidad de mosquitos afectado a las células.
 
 ```{r}
-##Exploración de datos
+##Exploración de datos Leishmania
 library(tidyverse)
 library(readr)
 library(dplyr)
@@ -108,7 +108,7 @@ lo que nos da a entender que contamos on un valor alto en percent blast. Igualme
 
 
 ```{r}
-##Exploración de datos
+##Exploración de datos de disease
 library(tidyverse)
 library(readr)
 library(dplyr)
@@ -209,7 +209,7 @@ plot(st_geometry(wrld))
 plot(ecu1)
 points(occr$decimalLongitude, occr$decimalLatitude, pch = 16, col = "blue")
 ```
-
+En el primer mapa nos representa los diferentes países elegidos de todo el mundo. Es sorprendente como la especie de puma concolor se encuentra dispersado por diferentes provincias del Ecuador, menos en las islas Galápagos. Tenems las provincias Esmeraldas, Carchi, Imbabura, Pichincha, Santo Domingo de los Tsachilas, Napo, Sumcumbíos, Orellana, Zamora Chimchipe, Cañar, Manabí Guayas, los Rios. Hay que recalcar que en Manabí Guayas y  los Rios se encuentran muy poca especie, pero las más abundantes es en Esmeraldas, Imbabura, Orellana, Pichincha y Napo esto se debe a que estas provincias cuentan con mayor cantidad de biodiversidad, asi como la alimentación que es variada en estas zonas. Y este felino puede adaptarse a cualquier tipo de habitat o clima.
 
 ```{r}
 # climatic data 
