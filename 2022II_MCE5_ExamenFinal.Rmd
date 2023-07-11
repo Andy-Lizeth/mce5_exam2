@@ -272,7 +272,41 @@ rslt = terra::as.data.frame(rstr, xy = T) %>%  as_tibble()
 El GLM nos da un valor de 100 
 
 
+Escogemos la planta llamada  Ceibo donde el nombre cientifíco es: *Ceiba pentandra* donde se realizará la distribución en el país vecino de COLOMBIA.
 
+
+
+
+
+
+```{r}
+require(pacman)
+pacman::p_load(rnaturalearthdata, extrafont, showtext, rnaturalearth, cptcity, 
+               SSDM, ggspatial, raster, terra, rgbif, tidyverse, sf, sp, 
+               geodata, glue, ggpubr)
+```
+
+```{r}
+g = gc(reset=T)
+rm(list=ls())
+options(scipen = 999, warn = -1)
+
+```
+
+```{r}
+# load data 
+sps = "Puma concolor"
+occr = occ_data(scientificName = sps, limit = 10e5, hasCoordinate = T, 
+                hasGeospatialIssue = F)
+
+```
+
+```{r}
+# Selec datafrane from occr object and filter for a country
+occr = occr[[2]]
+unique(occr$country) %>%  sort()
+occr = occr %>%  dplyr::filter(country == "Ecuador")
+```
 
 
 
