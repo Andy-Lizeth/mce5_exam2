@@ -77,7 +77,7 @@ Realizar los siguientes análisis y respectivas interpretaciones:
 5. Validez del modelo.
 
 ```{r}
-##Exploración de datos
+##Exploración de datos de aedes
 library(tidyverse)
 library(readr)
 library(dplyr)
@@ -89,7 +89,17 @@ summary(aedes)
 En aedes tenemos mediana de 523.5, la media de 865.4, el tercer cuartil de 1217.8 dando ententer que tiene el valor más alto.
 
 
-
+```{r}
+##Exploración de datos
+library(tidyverse)
+library(readr)
+library(dplyr)
+Leishmania <- read_excel("~/Leishmania.xlsx")
+str(Leishmania)
+summary(Leishmania)
+```
+En la exploración de datos no smuestra datos de otras enfer..percent_blast donde la mediana es 0.9500    percent_affect de la mediana es de 0.6500  percent_leuco=0.6300   periferia_leuc= 0.900 periferia_blast= 0.5200
+lo que nos da a entender que contamos on un valor alto en percent blast. Igualmente la temperatura varía de de 0.9 a 1.
 
 ## **PREGUNTA 2: Series de tiempo [3 PUNTOS]**
 
