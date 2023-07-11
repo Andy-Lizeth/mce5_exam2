@@ -168,3 +168,95 @@ Seleccione una especie de planta y una especie de animal; asimismo, dos tipos de
 
 Luego realice un análisis espacial de distribución de la especie en Ecuador continental en base a los datos de presencia del GBIF (use rgbif para descargar la data). Explique el resultado y compare la diferencia entre la salida de los dos modelos. En qué regiones los modelos difieren más en la predicción?   
 
+```{r}
+#Distribución espacial de la  especie
+library(rgbif)
+
+library(tidyverse)
+occ = occ_data(scientificName = 'Puma concolor', 
+                limit = 200000, 
+                hasCoordinate = TRUE, 
+                hasGeospatialIssue = FALSE)
+
+occ_col <- filter(occ$data, country == 'ECUADOR')
+shp <- raster::getData('GADM', country = 'ECUA', level = 1)
+
+gg <- ggplot() +
+  geom_point(data = occ_col, aes(x = decimalLongitude, y = decimalLatitude), color = 'black') +
+  geom_polygon(data = shp, aes(x = long, y = lat, group = group), color = 'grey', fill = NA) +
+  coord_fixed(ylim = c(-5, 12.5), xlim = c(-80, -67)) +
+  xlab('Longitud') +
+  ylab('Latitud')
+
+ggsave(plot = gg, filename = 'Puma concolor.png', units = 'cm', width = 12, height = 16, dpi = 300)
+
+gg
+
+```
+
+
+```{r}
+require(pacman)
+pacman::p_load(rnaturalearthdata, extrafont, showtext, rnaturalearth, cptcity, 
+               SSDM, ggspatial, raster, terra, rgbif, tidyverse, sf, sp, 
+               geodata, glue, ggpubr)
+
+```
+
+```{r}
+g = gc(reset=T)
+rm(list=ls())
+options(scipen = 999, warn = -1)
+```
+
+```{r}
+# load data 
+sps = "Aedes aegypti"
+occr = occ_data(scientificName = sps, limit = 10e5, hasCoordinate = T, 
+                hasGeospatialIssue = F)
+
+```
+
+```{r}
+# Selec datafrane from occr object and filter for a country
+occr = occr[[2]]
+unique(occr$country) %>%  sort()
+occr = occr %>%  dplyr::filter(country == "Ecuador")
+```
+
+
+
+# Get shapefiles
+wrld = ne_countries(returnclass = "sf", scale = 50)
+ecu1 = geodata::gadm(country = "ECU", level = 1, path = "tmpr")
+
+# Exploratory maps 
+plot(st_geometry(wrld))
+plot(ecu1)
+points(occr$decimalLongitude, occr$decimalLatitude, pch = 16, col = "red")
+
+# climatic data 
+bioc = geodata::worldclim_country(country = "ECU", var = "bioc", path = "tmpr")
+bioc = terra::crop(bioc, ecu1) %>% terra::mask(., ecu1)
+names(bioc) = glue("bioc{1:19}")
+
+# Merge coordinates and bioclimatic data
+occr = occr %>%  dplyr::select(x = decimalLongitude, y = decimalLatitude)
+vles = terra::extract(bioc, occr[,c("x", "y")])
+occr = cbind(occr[,c("x", "y")], vles[,-1])
+occr = as_tibble(occr)
+occr = mutate(occr, pb = 1)
+
+# Generate backgroun 
+cell = terra::extract(bioc[[1]], occr[,1:2], cells=T)$cell
+duplicated(cell)
+mask = bioc[[1]]*0
+mask[cell] = NA
+back = terra::as.data.frame(mask, xy =T) %>% as_tibble()
+back = sample_n(back, size = nrow(occr)*2, replace = FALSE)
+colnames(back)[3] = "pb"
+back = mutate(back, pb = 0)
+back = cbind(back, terra::extract(bioc, back[,c(1,2)])[,-1])
+back = as_tibble(back)
+
+Se escogió la especie de mosquitos 
