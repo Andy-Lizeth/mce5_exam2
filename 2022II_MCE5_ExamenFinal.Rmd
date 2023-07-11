@@ -376,7 +376,7 @@ rstr = terra::rast(rstr)
 rslt = terra::as.data.frame(rstr, xy = T) %>%  as_tibble()
 
 ```
-Al finalizar nos representa los datos de la especie de Annonas cherimola nos representa que el clima en diferentes provincias es apto para este tipo de especies. Al norte con las provincias Pichincha e Imbabura existe mas diversidad y en las Islas Galápagos y asi como en la parte del sur se cuenta con la provincia de Loja, también se ha visto que estas son exportadas mas en estas provincias y esta planta es de la  familia guanabana 
+Al finalizar nos representa los datos de la especie de Annonas cherimola nos representa que el clima en diferentes provincias es apto para este tipo de especies. Al norte con las provincias Pichincha e Imbabura existe mas diversidad y en las Islas Galápagos y asi como en la parte del sur se cuenta con la provincia de Loja, también se ha visto que estas son exportadas mas en estas provincias y esta planta es de la  familia guanabana.
 
 
 
