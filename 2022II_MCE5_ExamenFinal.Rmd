@@ -81,11 +81,13 @@ Realizar los siguientes análisis y respectivas interpretaciones:
 library(tidyverse)
 library(readr)
 library(dplyr)
-glm <- read_excel("glm.xlsx")
-View(glm)
-summary(glm)
+aedes <- read_excel("~/aedes.xlsx")
+str(aedes)
+summary(aedes)
+
 ```
-En aedes tenemos mediana de 523.5, la media de 865.4, el tercer cuartil de 1217.8 dando ententer que tiene el valor más alto 
+En aedes tenemos mediana de 523.5, la media de 865.4, el tercer cuartil de 1217.8 dando ententer que tiene el valor más alto.
+
 
 
 
