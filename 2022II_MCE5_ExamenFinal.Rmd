@@ -269,16 +269,10 @@ rstr = terra::rast(rstr)
 rslt = terra::as.data.frame(rstr, xy = T) %>%  as_tibble()
 ```
 
-El GLM nos da un valor de 100 
+El GLM nos da un valor de 100, como se mencio al principio la especie de puma concolor, se encuentra más abundante en el norte dell país, como las provincias Esmeraldas, Carchi, Pinchincha, así mismo en la provincia de Zamora Chimchipe, debido a que estas regiones cuentan con mayor biodiversidad de plantas, animales, bosques, etc.
 
 
-Escogemos la planta llamada  Ceibo donde el nombre cientifíco es: *Ceiba pentandra* donde se realizará la distribución en el país vecino de COLOMBIA.
-
-
-
-
-
-
+##Escogemos la planta llamada  Chirimoya donde el nombre cientifíco es: *Annona cherimola* del país de Ecuador
 ```{r}
 require(pacman)
 pacman::p_load(rnaturalearthdata, extrafont, showtext, rnaturalearth, cptcity, 
@@ -293,35 +287,93 @@ options(scipen = 999, warn = -1)
 
 ```
 
+Subimos el nombre de la especie 
 ```{r}
 # load data 
-sps = "Puma concolor"
+sps = "Annona cherimola"
 occr = occ_data(scientificName = sps, limit = 10e5, hasCoordinate = T, 
                 hasGeospatialIssue = F)
 
 ```
-
+Aquí filtramos los diferentes países.
 ```{r}
 # Selec datafrane from occr object and filter for a country
 occr = occr[[2]]
 unique(occr$country) %>%  sort()
 occr = occr %>%  dplyr::filter(country == "Ecuador")
 ```
+En total tenemos 39 países del mundo en la cual han sido filtradas.
+
+```{r}
+# Get shapefiles
+wrld = ne_countries(returnclass = "sf", scale = 50)
+ecu1 = geodata::gadm(country = "ECU", level = 1, path = "tmpr")
+```
+
+```{r}
+# Exploratory maps 
+plot(st_geometry(wrld))
+plot(ecu1)
+points(occr$decimalLongitude, occr$decimalLatitude, pch = 16, col = "red")
+
+```
+En esta imagen nos representa la diversidad de especies que hay  en distintas provincias, y estas son cambiadas por diferentes nombre por ejemplo aquí en la provincia de Napo lo conocemos con el nombre de Chirimoya, en la Sierra lo dicen Annanas, pero seún la información que tenemos en Napo no hay muchos tipos de árboles de chirimoya pero si en la provincia de IMBABURA, PICHINCHA, CARCHI, así como por la ciudad de LOJA y donde hay menos diverisdad de especies es en las provincias TUNGURAHUA, AZUAY y en las ISLAS GALÁPAGOS, así como ISLAS SANTA MARÍA, SANTA CRUZ y la ISLA SAN CRISTOBAL, son las que tienen menor especies de chirirmoyas.
 
 
+```{r}
+# climatic data 
+bioc = geodata::worldclim_country(country = "ECU", var = "bioc", path = "tmpr")
+bioc = terra::crop(bioc, ecu1) %>% terra::mask(., ecu1)
+names(bioc) = glue("bioc{1:19}")
+```
 
+```{r}
+# Merge coordinates and bioclimatic data
+occr = occr %>%  dplyr::select(x = decimalLongitude, y = decimalLatitude)
+vles = terra::extract(bioc, occr[,c("x", "y")])
+occr = cbind(occr[,c("x", "y")], vles[,-1])
+occr = as_tibble(occr)
+occr = mutate(occr, pb = 1)
+```
 
+```{r}
+# Generate backgroun 
+cell = terra::extract(bioc[[1]], occr[,1:2], cells=T)$cell
+duplicated(cell)
+mask = bioc[[1]]*0
+mask[cell] = NA
+back = terra::as.data.frame(mask, xy =T) %>% as_tibble()
+back = sample_n(back, size = nrow(occr)*2, replace = FALSE)
+colnames(back)[3] = "pb"
+back = mutate(back, pb = 0)
+back = cbind(back, terra::extract(bioc, back[,c(1,2)])[,-1])
+back = as_tibble(back)
+```
+```{r}
+# Join data 
+tble = rbind(occr, back)
+```
 
+```{r}
+# Random Forest Model
+bioc = stack(bioc)
+tble = as.data.frame(tble)
 
+srdf = modelling(algorithm = "GLM", Env = bioc, Occurrences = tble, Pcol = "pb", 
+                 Xcol = "x", cv.parm = c(0.75, 0.25), 
+                 Ycol = "y", metric = "TSS", select.metric = "AUC")
+plot(srdf@projection)
+plot(srdf@binary)
+srdf@parameters
+srdf@name
+srdf@variable.importance
+as.numeric(srdf@variable.importance) %>% sum()
 
+rstr = srdf@projection
+rstr = terra::rast(rstr)
+rslt = terra::as.data.frame(rstr, xy = T) %>%  as_tibble()
 
-
-
-
-
-
-
-
+```
 
 
 
