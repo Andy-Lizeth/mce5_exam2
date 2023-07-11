@@ -241,7 +241,7 @@ back = cbind(back, terra::extract(bioc, back[,c(1,2)])[,-1])
 back = as_tibble(back)
 
 ```
-
+En esta parte generamos los códigos  de fondo de verdadero y falso. 
 
 ```{r}
 # Join data 
