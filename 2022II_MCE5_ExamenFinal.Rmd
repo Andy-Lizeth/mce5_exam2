@@ -1,8 +1,8 @@
 ---
 title: "Métodos Cuantitativos en Ecología - MCE5"
 subtitle: "EXAMEN FINAL - 2022II"
-author: 'ANDY AVILÉS LIZETH FÁTIMA'
-date: "`r Sys.Date(11-07-2023)`
+author: 'ANDY AVILÉS LIZETH FÁTIMA'"
+date: "`r Sys.Date()`
 output:
   html_document:
     toc: yes
@@ -76,7 +76,16 @@ Realizar los siguientes análisis y respectivas interpretaciones:
 
 5. Validez del modelo.
 
-
+```{r}
+##Exploración de datos
+library(tidyverse)
+library(readr)
+library(dplyr)
+glm <- read_excel("glm.xlsx")
+View(glm)
+summary(glm)
+```
+En aedes tenemos mediana de 523.5, la media de 865.4, el tercer cuartil de 1217.8 dando ententer que tiene el valor más alto 
 
 
 
