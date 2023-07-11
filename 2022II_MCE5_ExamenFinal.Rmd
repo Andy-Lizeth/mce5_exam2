@@ -87,7 +87,12 @@ summary(aedes)
 
 ```
 En aedes tenemos mediana de 523.5, la media de 865.4, el tercer cuartil de 1217.8 dando ententer que tiene el valor más alto.
-
+```{r}
+plot(aedes$repetition, aedes$aedes)
+```
+Planteamientos de HIPOTESIS
+HO: Los insecticidad que estan descritas aumentan la cantidad de mosquitos  no afectado a las células.
+HA: Los insecticidad que estan descritas disminuyen la cantidad de mosquitos afectado a las células.
 
 ```{r}
 ##Exploración de datos
@@ -101,6 +106,7 @@ summary(Leishmania)
 En la exploración de datos no smuestra datos de otras enfer..percent_blast donde la mediana es 0.9500    percent_affect de la mediana es de 0.6500  percent_leuco=0.6300   periferia_leuc= 0.900 periferia_blast= 0.5200
 lo que nos da a entender que contamos on un valor alto en percent blast. Igualmente la temperatura varía de de 0.9 a 1.-.
 
+
 ```{r}
 ##Exploración de datos
 library(tidyverse)
@@ -111,6 +117,8 @@ str(disease)
 summary(disease)
 ```
 Tenemos datos nativo , datos genero, el tramiento y lo años, conmparando con estos datos vemos que gender, treatment, recover cuenta con un dato de 1000, el cuartil 1 de el resto de datos es de o menos el de año que cuneta con 9.5
+
+
 
 ## **PREGUNTA 2: Series de tiempo [3 PUNTOS]**
 
