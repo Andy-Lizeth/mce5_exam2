@@ -99,7 +99,7 @@ str(Leishmania)
 summary(Leishmania)
 ```
 En la exploración de datos no smuestra datos de otras enfer..percent_blast donde la mediana es 0.9500    percent_affect de la mediana es de 0.6500  percent_leuco=0.6300   periferia_leuc= 0.900 periferia_blast= 0.5200
-lo que nos da a entender que contamos on un valor alto en percent blast. Igualmente la temperatura varía de de 0.9 a 1.
+lo que nos da a entender que contamos on un valor alto en percent blast. Igualmente la temperatura varía de de 0.9 a 1.-.
 
 ## **PREGUNTA 2: Series de tiempo [3 PUNTOS]**
 
