@@ -148,6 +148,13 @@ summary(quakes)
 Las medidas estadisticas son usadas para resumir estos datos que tenemos sobre la cantidad de eventos de terremotos que fueron sucediendo en cada años, por ejemplo en el año 2016 tenemos el min de 2, asi como el primer quintil en el año 1941 se tuvo 9,  la media y la mediana en el año 1996 fue de 12 y 12.61 asi como el máximo en el año 2015 fue de 24 de  terremoto.
 
 ```{r}
+plot(quakes)
+```
+
+En esta gráfica cada año sucedían los terremotos y siempre varían los datos del grado de terremotos.
+
+
+```{r}
 ##Exploración de datos de hepatitis
 library(tidyverse)
 library(readr)
@@ -158,6 +165,12 @@ summary(hepatitis)
 ```
 
 Las medidas estadisticas son usadas para resumir estos datos que tenemos sobre los casos de hepatitis que fueron adquiriendo las personas entre los años 2010 y 2017, las personas mas afectadas por hepatitis fueron en el año 2010, 2011, 2012 y esto fue controlandose desde el año 2013 al año 2017.
+```{r}
+plot(hepatitis)
+```
+Las personas más afectados con hepatitis fueron los 3 primero años.
+
+
 ```{r}
 ##Exploración de datos de wildfire 
 library(tidyverse)
@@ -170,10 +183,13 @@ summary(wildfire)
 
 En estos datos estadísticos nos presenta la cantidad de eventos de incendios forestales que fueron sucediendo entre el año 2003 y 2017, en el año 2003 la cantidad de eventos fue menor pero desde el año 2010 la frecuencia de los incendios fue muy seguido y con mayores cantidades de quemas de bosques llegando así a un máximo de 67668.
 
-
+MODELO ARIMA 
 2. ARIMA, SARIMA, ETS, NNAR
-
 3. Validez de los modelos.
+```{r}
+plot(wildfire)
+```
+Los casos de incendio con mayor frecuencia fue en el año 2010 hasta el año 2016.
 
 4. Predicción a 20 años o a 24 meses según corresponda. 
 
