@@ -157,11 +157,18 @@ str(hepatitis)
 summary(hepatitis)
 ```
 
-
-- wildfire: cantidad de eventos de incendios forestales por mes entre 2003 y 2017.
-
-
 Las medidas estadisticas son usadas para resumir estos datos que tenemos sobre los casos de hepatitis que fueron adquiriendo las personas entre los años 2010 y 2017, las personas mas afectadas por hepatitis fueron en el año 2010, 2011, 2012 y esto fue controlandose desde el año 2013 al año 2017.
+```{r}
+##Exploración de datos de wildfire 
+library(tidyverse)
+library(readr)
+library(dplyr)
+wildfire <- read_excel("C:/Users/USUARIO/Downloads/wildfire.xlsx")
+str(wildfire)
+summary(wildfire)
+```
+
+En estos datos estadísticos nos presenta la cantidad de eventos de incendios forestales que fueron sucediendo entre el año 2003 y 2017, en el año 2003 la cantidad de eventos fue menor pero desde el año 2010 la frecuencia de los incendios fue muy seguido y con mayores cantidades de quemas de bosques llegando así a un máximo de 67668.
 
 
 2. ARIMA, SARIMA, ETS, NNAR
