@@ -136,6 +136,29 @@ Realizar los siguientes análisis y respectivas interpretaciones:
 
 1. Análisis exploratorio: autocorrelación y descomposición, análisis estacional.
 
+```{r}
+##Exploración de datos de disease
+library(tidyverse)
+library(readr)
+library(dplyr)
+quakes <- read_excel("C:/Users/USUARIO/Downloads/quakes.xlsx")
+str(quakes)
+summary(quakes)
+```
+Las medidas estadisticas son usadas para resumir estos datos que tenemos sobre la cantidad de eventos de terremotos que fueron sucediendo en cada años, por ejemplo en el año 2016 tenemos el min de 2, asi como el primer quintil en el año 1941 se tuvo 9,  la media y la mediana en el año 1996 fue de 12 y 12.61 asi como el máximo en el año 2015 fue de 24 de  terremoto.
+
+```{r}
+##Exploración de datos de disease
+library(tidyverse)
+library(readr)
+library(dplyr)
+quakes <- read_excel("C:/Users/USUARIO/Downloads/quakes.xlsx")
+str(quakes)
+summary(quakes)
+```
+
+
+
 2. ARIMA, SARIMA, ETS, NNAR
 
 3. Validez de los modelos.
